@@ -43,7 +43,9 @@ export class GitHubHelper {
     headRepository: string
   ): Promise<Pull> {
     const [headOwner] = headRepository.split('/')
-    const headBranch = `${headOwner}:${inputs.branch}`
+    // 这种方式会导致调用 gitea api 创建 PR 时，gitea 无法正确识别 head_repo
+    // const headBranch = `${headOwner}:${inputs.branch}`
+    const headBranch = `${inputs.branch}`
     const headBranchFull = `${headRepository}:${inputs.branch}`
 
     // Try to create the pull request
